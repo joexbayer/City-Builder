@@ -1,6 +1,6 @@
 class CityBuilder {
 	constructor(screen_width, screen_height){
-		this.total_cities = 15;
+		this.total_cities = 20;
 		this.screen_height = screen_height;
 		this.screen_width = screen_width;
 		this.max = 195;
