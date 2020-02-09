@@ -3,8 +3,8 @@ class CityBuilder {
 		this.total_cities = 15;
 		this.screen_height = screen_height;
 		this.screen_width = screen_width;
-		this.max = 205;
-		this.min = 95;
+		this.max = 195;
+		this.min = 90;
 		this.cities = 0;
 		this.next_x = Math.floor(Math.random() * (screen_width-screen_width*0.5));
 		this.next_y = Math.floor(Math.random() * (screen_height-screen_height*0.5));
@@ -30,7 +30,7 @@ class CityBuilder {
 		var failSafe = 0;
 		while((temp_x<(0+80) || temp_x>screen_width-80) || (temp_y<(0+80) || temp_y>screen_height-80) || (cityCheck)){
 			failSafe++;
-			if(failSafe > 100){
+			if(failSafe > 250){
 				location.reload();
 			}
 			var cityCheck = false;
