@@ -2,6 +2,11 @@ body {
 	font-family: 'Times', cursive;
   margin:0;
   padding: 0;
+  -ms-overflow-style: none;
+}
+body::-webkit-scrollbar {
+  background-image: linear-gradient(to right, black, black);
+  color:white;
 }
 
 #start-button {
