@@ -7,6 +7,9 @@ body {
 body::-webkit-scrollbar {
   display: none;
 }
+.options::-webkit-scrollbar {
+  display: none;
+}
 
 #start-button {
 	position: absolute;
@@ -31,6 +34,7 @@ body::-webkit-scrollbar {
 
 .options {
 	overflow-x: hidden;
+  -ms-overflow-style: none;
 	width: 5%;
 	height: 97vh;
 	background-color: #000885;
@@ -52,13 +56,12 @@ body::-webkit-scrollbar {
 }
 .options:hover {
 	width: 20%;
-	height: 98vh;
+	height: 97vh;
 	left: 80%;
 	background-color: #020ca8;
   background-image: linear-gradient(to right, #000885, #0049bf);
 	float:right;
 	border: 2px white solid;
-	border-radius: 20px;
 	z-index: 999;
 	position: absolute;
   color:white;
@@ -127,6 +130,10 @@ li {
 
 #path_text {
   overflow: scroll;
+  -ms-overflow-style: none;
+}
+#path_text::-webkit-scrollbar {
+  display: none;
 }
 
 #info_text {
