@@ -1,0 +1,155 @@
+body {
+	font-family: 'Times', cursive;
+  margin:0;
+  padding: 0;
+}
+
+#start-button {
+	position: absolute;
+  font-family: 'Times', cursive;
+	left: 35%;
+	width: 25%;
+	top: 40%;
+	height: 10%;
+  font-size: 150%;
+}
+#start-button:hover {
+  position: absolute;
+  font-size: 200%;
+  left: 35%;
+  width: 25%;
+  top: 40%;
+  height: 10%;
+  border-radius: 20px;
+  letter-spacing: 10px;
+  background-image: none;
+}
+
+.options {
+	overflow-x: hidden;
+	width: 5%;
+	height: 97vh;
+	background-color: #000885;
+  background-image: linear-gradient(to right, #000885, #0049bf);
+	float:right;
+	border: 2px white solid;
+	z-index: 999;
+	position: absolute;
+	left: 95%;
+	transition: 0.5s;
+	font-family: 'Times';
+  color: transparent;
+}
+.options-content {
+	height: 100%;
+}
+.options-content:hover {
+	display: block;
+}
+.options:hover {
+	width: 20%;
+	height: 98vh;
+	left: 80%;
+	background-color: #020ca8;
+  background-image: linear-gradient(to right, #000885, #0049bf);
+	float:right;
+	border: 2px white solid;
+	border-radius: 20px;
+	z-index: 999;
+	position: absolute;
+  color:white;
+	transition: 0.5s;
+}
+.canvasdiv {
+	float:left;
+	z-index: 1;
+}
+
+ul {
+  height: 400px;
+}
+li {
+  height: 40px;
+}
+
+#resetButton {
+  background-image: linear-gradient(to right, #ffffff, #ff6363);
+}
+
+.button {
+  overflow: hidden;
+  position:absolute;
+  background-image: linear-gradient(#ebebeb, #ffffff); 
+  font-family: 'Times', cursive;
+  border: none;
+  color: black;
+  padding: 20px;
+  letter-spacing: 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition: 0.5s;
+  width: 90%;
+  height: 5%;
+}
+.button:hover {
+  background-image: linear-gradient(to right, #ffffff, #0055ff);
+  transition: 0.5s;
+  border: none;
+  color: black;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  text-decoration: none;
+  letter-spacing: 3px;
+  display: inline-block;
+  font-size: 17px;
+  width: 80%;
+}
+
+#resetButton {
+  background-image: linear-gradient(to bottom, #ffffff, red);
+}
+
+#arrow {
+    border-right:2px solid white;
+    border-bottom:2px solid white;
+    width:10px;
+    height:10px;
+    transform: rotate(-45deg);
+    margin-top:40px;
+}
+
+#path_text {
+  overflow: scroll;
+}
+
+#info_text {
+  text-align: center;
+  padding: 20px;
+  top:50px;
+  position: relative;
+}
+
+
+ul li {
+  position: relative;
+  padding-bottom: 10px;
+}
+
+ul {
+  list-style: none;
+}
+
+ul li:before{
+   content: '';
+   position: absolute;
+   border-right:2px solid white;
+   border-bottom:2px solid white;
+   width:10px;
+   height:10px;
+   top: calc(50% - 4px);
+   left: -20px;
+   transform: translateY(-50%) rotate(-45deg);
+}

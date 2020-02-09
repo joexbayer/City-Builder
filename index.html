@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>City Blueprint</title>
+	<link href="https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" media="screen and (device-height: 600px)"/>
+</head>
+
+<body style="background-color: black">
+	<div style="height: 100vh;width:  100vw;">
+		<div class="canvasdiv"onclick="mouseClick(event)">
+				<canvas style="border:2px solid lightgray;" id="myCanvas" width="height: 100vw" height="100vh"></canvas>
+		</div>
+		<button class="button" id="start-button" onclick="startSimulator()">Start</button>
+		<div class="options">
+			<div class="options-content">
+				<ul>
+				<h1 style="color:white;">Options: </h1>
+				<li><button id="changeMS" class="button" onclick="changeMouseState()">Find Path</button></li>
+				<li id="saveToggle2" style="display: none;"><button id="saveToggle" style="display: none;" class="button" onclick="togglePathSave()">Save Paths</button></li>
+				<li><button id="premadeCityButton" class="button" onclick="toggleDrawPremade()">Random City</button></li>
+				<li><button class="button" onclick="clearCities()">Clear Cities</button></li>
+				<li><button id="resetButton" class="button" onclick="location.reload()">Reset</button></li>
+				<li><p style="height: 200px;" id="path_text">Current Paths: </p></li>
+			</ul>
+			</div>
+			<p id="info_text">INFO: To find the shortest path between to cities press the <b style="color:lightgreen">"Find Path"</b> button, if you want to connect multiple cities click the <b style="color:lightgreen">"Save Paths"</b> button. To create a fully random city press the <b style="color:lightgreen">"Random City"</b> button. </p>
+		</div>
+	</div>
+
+</body>
+<script src="CityBuilder.js"></script>
+<script src="Pathfinder.js"></script>
+<script src="BotCar.js"></script>
+<script src="Road.js"></script>
+<script src="City.js"></script>
+<script src="CustomAnimation.js"></script>
+<script src="Main.js"></script>
+</html>
