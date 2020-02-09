@@ -5,8 +5,7 @@ body {
   -ms-overflow-style: none;
 }
 body::-webkit-scrollbar {
-  background-image: linear-gradient(to right, black, black);
-  color:white;
+  display: none;
 }
 
 #start-button {
