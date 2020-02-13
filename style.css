@@ -51,10 +51,10 @@ body::-webkit-scrollbar {
 .options-content {
 	height: 100%;
 }
-.options-content:hover, .options-content:active {
+.options-content:hover, .options-content:active, .options-content:focus {
 	display: block;
 }
-.options:hover, .options:active {
+.options:hover, .options:active, .options:focus {
 	width: 20%;
 	height: 99vh;
 	left: 80%;
