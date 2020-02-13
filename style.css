@@ -36,7 +36,7 @@ body::-webkit-scrollbar {
 	overflow-x: hidden;
   -ms-overflow-style: none;
 	width: 5%;
-	height: 97vh;
+	height: 99vh;
 	background-color: #000885;
   background-image: linear-gradient(to right, #000885, #0049bf);
 	float:right;
@@ -51,12 +51,12 @@ body::-webkit-scrollbar {
 .options-content {
 	height: 100%;
 }
-.options-content:hover {
+.options-content:hover, .options-content:active {
 	display: block;
 }
-.options:hover {
+.options:hover, .options:active {
 	width: 20%;
-	height: 97vh;
+	height: 99vh;
 	left: 80%;
 	background-color: #020ca8;
   background-image: linear-gradient(to right, #000885, #0049bf);
