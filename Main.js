@@ -1,7 +1,7 @@
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 canvas.width = document.body.clientWidth*0.95; //document.width is obsolete
-canvas.height = document.body.clientHeight*0.97; //document.height is obsolete
+canvas.height = document.body.clientHeight*0.99; //document.height is obsolete
 var forMouse = document.getElementById("changeMS");
 var savePathButton = document.getElementById("saveToggle");
 var savePathButton2 = document.getElementById("saveToggle2");
@@ -201,6 +201,19 @@ function changeMouseState(){
 	}
 }
 
+var optionbox = document.getElementById("options");
+optionbox.addEventListener("click", showOptionsOnClick);
+optionbox.addEventListener("mouseout", showOptionsOnClick2);
+
+function showOptionsOnClick(){
+	optionbox.setAttribute("style", "width: 20%");
+	optionbox.setAttribute("style", "left: 80%");
+	console.log("click");
+}
+function showOptionsOnClick2(){
+	optionbox.removeAttribute("style");
+	console.log("click");
+}
 
 
 
@@ -225,7 +238,14 @@ grd.addColorStop(1, "#00098f");
 
 var cords = [];
 
-setInterval(function update(){
+setInterval(async function update(){
+	if(canvas.width != document.body.clientWidth*0.95 || canvas.height != document.body.clientHeight*0.99){
+		canvas.width = document.body.clientWidth*0.95; //document.width is obsolete
+		canvas.height = document.body.clientHeight*0.99; //document.height is obsolete
+
+		screen_width = canvas.width;
+		screen_height = canvas.height;
+	}
 	//draws background
 		ctx.fillStyle = grd;//#1f93ff
 		ctx.lineWidth = 3;
