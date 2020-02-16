@@ -203,13 +203,21 @@ function changeMouseState(){
 
 //mobile click fix
 var optionbox = document.getElementById("options");
+var optionbox_clicked = false;
 optionbox.addEventListener("click", showOptionsOnClick);
-optionbox.addEventListener("mouseout", showOptionsOnClick2);
+optionbox.addEventListener("mouseout", showOptionsOnMouseLeave);
 function showOptionsOnClick(){
-	optionbox.setAttribute("style", "width: 20%");
-	optionbox.setAttribute("style", "left: 80%");
+	if(optionbox_clicked){
+		optionbox.removeAttribute("style");
+		optionbox_clicked = false;
+	} else {
+		optionbox.setAttribute("style", "width: 20%");
+		optionbox.setAttribute("style", "left: 80%");
+		optionbox_clicked = true;
+	}
 }
-function showOptionsOnClick2(){
+//remove moble fix for pc
+function showOptionsOnMouseLeave(){
 	optionbox.removeAttribute("style");
 }
 
