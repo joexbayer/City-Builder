@@ -201,18 +201,16 @@ function changeMouseState(){
 	}
 }
 
+//mobile click fix
 var optionbox = document.getElementById("options");
 optionbox.addEventListener("click", showOptionsOnClick);
 optionbox.addEventListener("mouseout", showOptionsOnClick2);
-
 function showOptionsOnClick(){
 	optionbox.setAttribute("style", "width: 20%");
 	optionbox.setAttribute("style", "left: 80%");
-	console.log("click");
 }
 function showOptionsOnClick2(){
 	optionbox.removeAttribute("style");
-	console.log("click");
 }
 
 
