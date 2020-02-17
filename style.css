@@ -11,6 +11,15 @@ body::-webkit-scrollbar {
   display: none;
 }
 
+#citiesToBuild {
+  background-color: transparent;
+  color: white;
+  border:  white 1px solid;
+  text-align: center;
+  width: 85%;
+  height: 80%;
+}
+
 #start-button {
 	position: absolute;
   font-family: 'Times', cursive;

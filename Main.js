@@ -82,13 +82,12 @@ function toggleDrawPremade(){
 		save_path_city_list = [];
 		pathfinding_paths = [];
 	} else {
-		citybuilder = new CityBuilder(screen_width, screen_height);
+		citybuilder = new CityBuilder(screen_width, screen_height, document.getElementById("citiesToBuild").value);
 		cords = citybuilder.build();
 		cities = [];
 		save_path_city_list = [];
 		pathfinding_paths = [];
 		drawPremade = true;
-		console.log(cords);
 		premadeCityButton.setAttribute("style", "background-image: linear-gradient(to left, #ffffff, red);");
 	}
 }
@@ -126,7 +125,7 @@ function mouseClick(e){
 						}
 						return;
 					}
-					//if start city is not the clicked city and start city has been clicked and clicked city is not end city, and its not in saved path.
+					//if start city is not the clicked city and start city has been clicked and clicked city is not the end city, and its not in saved path.
 					//this means its a new city that has not been clicked before.
 					if(start_city != cities[i] && start_city != null && cities[i] != end_city && !(save_path_city_list.includes(cities[i]))){
 						//if save path is activated, create new path and return
@@ -257,7 +256,6 @@ setInterval(async function update(){
 		ctx.lineWidth = 3;
 		ctx.fillRect(0, 0, screen_width, screen_height);
 	if(start_simulat){
-
 		//draw premade city.
 		if(drawPremade){
 			for (var i = 0; i < cords.length; i++) {

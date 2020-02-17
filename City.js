@@ -102,7 +102,7 @@ class City {
 				if(distance < this.detection_radius){
 						this.knownCities.push(cities[i]);
 						this.setRoad([this.x_position,this.y_position], [cities[i].getPosition()[0], cities[i].getPosition()[1]]);
-						this.animator.addAnimationStage(4, 20, this.radius, [[this.x_position,this.y_position], [cities[i].getPosition()[0], cities[i].getPosition()[1]]]);
+						this.animator.addAnimationStage(4, 10, this.radius, [[this.x_position,this.y_position], [cities[i].getPosition()[0], cities[i].getPosition()[1]]]);
 				}
 			}
 
