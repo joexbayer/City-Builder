@@ -1,9 +1,10 @@
+//Pseudocode from: https://en.wikipedia.org/wiki/A*_search_algorithm
 class Pathfinder {
-	constructor(start, goal, cities){
+	constructor(start, goal, nodes){
 		this.start = start;
 		this.goal = goal;
 		this.path = [];
-		this.cities = cities;
+		this.nodes = nodes;
 	}
 
 	reconstruct_path(cameFrom, current){
@@ -30,7 +31,7 @@ class Pathfinder {
 	A_start(){
 		/*
 		if start == goal, reconstruct path.
-		Start in start city, find known cities, calculate distance;
+		Start in start city, find known nodes, calculate distance;
 		F(n) = g(n) + h(n), g(n) is length of current path and h(n) is actual distance from current node to goal.
 
 		For node n, gScore[n] is the cost of the cheapest path from start to n currently known.
@@ -63,7 +64,6 @@ class Pathfinder {
 				}
 			}
 			if(current == this.goal){
-				//todo
 				return this.reconstruct_path(cameFrom, current);
 			}
 
