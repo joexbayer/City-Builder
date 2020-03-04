@@ -3,8 +3,8 @@ class CityBuilder {
 		this.total_cities = toBuild;
 		this.screen_height = screen_height;
 		this.screen_width = screen_width;
-		this.max = 195;
-		this.min = 90;
+		this.max = 250;
+		this.min = 110;
 		this.cities = 0;
 		this.next_x = Math.floor(Math.random() * (screen_width-screen_width*0.5));
 		this.next_y = Math.floor(Math.random() * (screen_height-screen_height*0.5));
@@ -16,7 +16,7 @@ class CityBuilder {
 		while(this.cities < this.total_cities){
 			var temp = this.getNewCords(this.next_x, this.next_y);
 			this.next_x = temp[0];
-			this.next_y = temp[1];
+			this.next_y = temp[1];	
 			this.cords.push([this.next_x, this.next_y]);
 			this.cities++;
 		}

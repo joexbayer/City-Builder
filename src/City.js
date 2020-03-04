@@ -4,7 +4,7 @@ class City {
 		this.x_position = x;
 		this.y_position = y;
 		this.roads = [];
-		this.detection_radius = 250;
+		this.detection_radius = 300;
 		this.animator = new CustomAnimation();
 		this.knownCities = [];
 		this.animator.setColor("white");
@@ -96,16 +96,26 @@ class City {
 			if(this.knownCities.includes(cities[i])){
 				isFound = true;
 			}
+			for (var j = 0; j < this.knownCities.length; j++) {
+				if(this.knownCities[j].getKnownCities().includes(cities[i])){
+					isFound = true;
+				}
+				for (var p = 0; p < this.knownCities[j].getKnownCities().length; p++) {
+					if(this.knownCities[j].getKnownCities()[p].getKnownCities().includes(cities[i])){
+						isFound = true;
+					}
+				}
+			}
 			if (this != cities[i] && !isFound){
 				var distance_vector = [this.x_position-cities[i].getPosition()[0], this.y_position-cities[i].getPosition()[1]];
 				var distance = Math.floor(Math.sqrt(distance_vector[0]*distance_vector[0] + distance_vector[1]*distance_vector[1]));
 				if(distance < this.detection_radius){
-						this.knownCities.push(cities[i]);
-						this.setRoad([this.x_position,this.y_position], [cities[i].getPosition()[0], cities[i].getPosition()[1]]);
-						this.animator.addAnimationStage(4, 10, this.radius, [[this.x_position,this.y_position], [cities[i].getPosition()[0], cities[i].getPosition()[1]]]);
+					this.knownCities.push(cities[i]);
+					this.detection_radius = this.detection_radius - this.detection_radius*(this.knownCities.length/20);
+					this.setRoad([this.x_position,this.y_position], [cities[i].getPosition()[0], cities[i].getPosition()[1]]);
+					this.animator.addAnimationStage(4, 10, this.radius, [[this.x_position,this.y_position], [cities[i].getPosition()[0], cities[i].getPosition()[1]]]);
 				}
 			}
-
 		}
 	}
 }
