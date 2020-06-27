@@ -325,10 +325,10 @@ setInterval(async function update(){
 		}
 
 		//draw pathfinding path if it exsists
-		pathstext.innerHTML = "Current Paths: <br> From: <br>";
+		//pathstext.innerHTML = "Current Paths: <br> From: <br>";
 		for (var j = 0; j < pathfinding_paths.length; j++) {
 			for(var i =0; i < pathfinding_paths[j].length; i++){
-				pathstext.innerHTML = pathstext.innerHTML + "City "+pathfinding_paths[j][i].getCityID()+"<br>";
+				//pathstext.innerHTML = pathstext.innerHTML + "City "+pathfinding_paths[j][i].getCityID()+"<br>";
 				//ctx.beginPath();
 				//ctx.strokeStyle = "red";
 				//ctx.lineWidth = 3;
