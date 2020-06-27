@@ -24,5 +24,6 @@ Options:
   <li>"Random City - Creates a fully random city, which the user can expand upon. <b>(Can crash, and reload the site!)</b>"</li>
   <li>"Clear Cities - Clears all current cities."</li>
   <li>"Reset - Does a full reset of the website."</li>
-  <li>"Current paths" - Shows a list of all cities in a current pathfinding path.</li>
+  <li>"Help - Shows a help board with usefull information</li>
+  <li>"20 - Sets number of cities created by Random City</li>
 </ul>
