@@ -149,6 +149,18 @@ li {
   text-align: center;
 }
 
+.info-board {
+  width: 35%;
+  height: 35%;
+  position: absolute;
+  border: solid black 4px;
+  left: 30%;
+  top:30%;
+  background-color: white;
+  z-index: 999999;
+  text-align: center;
+}
+
 
 ul li {
   position: relative;

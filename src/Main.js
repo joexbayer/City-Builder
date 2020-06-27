@@ -7,11 +7,13 @@ var savePathButton = document.getElementById("saveToggle");
 var savePathButton2 = document.getElementById("saveToggle2");
 var premadeCityButton = document.getElementById("premadeCityButton");
 var pathstext = document.getElementById("path_text");
+var infoboardobject = document.getElementById("info-board-id");
 
 var screen_width = canvas.width;
 var screen_height = canvas.height;
 var start_simulat = false;
 var drawPremade = false;
+var infoboardtoggle = false;
 
 var mouseClickState = 0;
 
@@ -199,6 +201,12 @@ function changeMouseState(){
 		start_city = null;
 	}
 }
+document.addEventListener('keydown', function(event) {
+	var x = event.keyCode;
+	if (x == 82) {  //r is clicked.
+		cities.pop();
+	}
+}, false);
 
 //mobile click fix
 var optionbox = document.getElementById("options");
@@ -218,6 +226,17 @@ function showOptionsOnClick(){
 //remove moble fix for pc
 function showOptionsOnMouseLeave(){
 	optionbox.removeAttribute("style");
+}
+
+//function show / hide infoboard
+function InfoBoardToggle(){
+	if(infoboardtoggle){
+		infoboardobject.style.display = "none";
+		infoboardtoggle = false;
+	} else if(!infoboardtoggle){
+		infoboardobject.style.display = "block";
+		infoboardtoggle = true;
+	}
 }
 
 
