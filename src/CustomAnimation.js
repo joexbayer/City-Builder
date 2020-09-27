@@ -42,7 +42,7 @@ class CustomAnimation {
 	     		ctx.font = "15px Times";
 				ctx.fillStyle = "black";
 				ctx.textAlign = "center";
-				ctx.fillText("City "+id, x, y+5);
+				ctx.fillText("Node "+id, x, y+5);
 			} else if(stageID2 == 4){
 
 				var lineDetails =  this.doneDraw[i][3];
