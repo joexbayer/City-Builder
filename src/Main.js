@@ -74,7 +74,7 @@ function togglePathSave(){
 		start_city = null;
 	} else {
 		save_path_toggle = true;
-		savePathButton.setAttribute("style", "background-image: linear-gradient(to left, #ffffff, red);");
+		savePathButton.setAttribute("style", "background-image: linear-gradient(to left, #ffffff, green);");
 		pathfinding_paths = [];
 		save_path_city_list = [];
 		for (var i = 0; i < cities.length; i++) {
@@ -101,7 +101,7 @@ function toggleDrawPremade(){
 		save_path_city_list = [];
 		pathfinding_paths = [];
 		drawPremade = true;
-		premadeCityButton.setAttribute("style", "background-image: linear-gradient(to left, #ffffff, red);");
+		premadeCityButton.setAttribute("style", "background-image: linear-gradient(to left, #ffffff, green);");
 	}
 }
 
@@ -112,7 +112,7 @@ function toggleDirection(){
 		directionButton.innerHTML = 'Undirected';
 	} else {
 		directed = false;
-		directionButton.setAttribute("style", "background-image: linear-gradient(to left, #ffffff, red);");
+		directionButton.setAttribute("style", "background-image: linear-gradient(to left, #ffffff, green);");
 		directionButton.innerHTML = 'Directed';
 	}
 }
@@ -293,7 +293,7 @@ function mouseClick(e){
 function changeMouseState(){
 	if (mouseClickState == 0) {
 		mouseClickState = 1;
-		forMouse.setAttribute("style", "background-image: linear-gradient(to left, #ffffff, red);");
+		forMouse.setAttribute("style", "background-image: linear-gradient(to left, #ffffff, green);");
 		savePathButton.style.display = "block";
 		savePathButton2.style.display = "block";
 	} else {
