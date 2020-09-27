@@ -151,12 +151,13 @@ li {
 }
 
 .info-board {
-  width: 35%;
-  height: 35%;
+  width: 75%;
+  height: 75%;
+  font-size: 20px;
   position: absolute;
   border: solid black 4px;
-  left: 30%;
-  top:30%;
+  left: 10%;
+  top:15%;
   background-color: white;
   z-index: 999999;
   text-align: center;
@@ -165,7 +166,7 @@ li {
 
 ul li {
   position: relative;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
 }
 
 ul {

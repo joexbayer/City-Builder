@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>City Blueprint</title>
+		<title>Graph Visualizer</title>
 		<link href="https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="src/style.css">
 		<link rel="stylesheet" media="screen and (device-height: 600px)"/>
@@ -14,21 +14,37 @@
 			</div>
 			<div style="display: none;" id="info-board-id" class="info-board">
 				<p style="font-size: 25px;">Help board:</p>
-				<p id="info_text">INFO: Press <b style="color:red">R</b> to undo last city built. To find the shortest path between to cities press the <b style="color:darkgreen">"Find Path"</b> button, if you want to connect multiple cities click the <b style="color:darkgreen">"Save Paths"</b> button. To create a fully random city press the <b style="color:darkgreen">"Random City"</b> button. </p>
-				<button style="width: 20%;height: 20%;" onclick="InfoBoardToggle();">close</button>
+				<ol id="info_text">
+					<li>Press <b style="color:blue">R</b> to undo last node or edge created.</li>
+					<li>Options that are <b style="color:red">RED</b> are turned off.</li>
+					<li>To connect nodes simply click on a node then the next.</li>
+					<li>The base case will be a undirected edge, to create a directed edge click the option in the menu.</li>
+					<li>"Autoconnect" will connect nodes that are close to each other.</li>
+					<li>Bots will move with the edges, click "Hide Bots" to hide them.</li>
+					<li>"Random Graph" will create a random graph based on input at the bottom.</li>
+					<li>To find the shortest path between to nodes press the <b style="color:darkgreen">"Find Path"</b> button.</li>
+					<li>If you want to connect multiple nodes click the <b style="color:darkgreen">"Save Paths"</b> button.</li>
+				</ol>
+				<button style="width: 10%;height: 10%;" onclick="InfoBoardToggle();">close</button>
 			</div>
 			<button class="button" id="start-button" onclick="startSimulator()">Start</button>
 			<div id="options" class="options">
 				<div class="options-content">
 					<ul>
 						<h1 style="color:white;">Options: </h1>
-						<li><button id="changeMS" class="button" 	onclick="changeMouseState()">Find Path</button></li>
+						<li><h2 style="color:white;">Path Mode: </h2></li>
+						<li><button id="changeMS" class="button" onclick="changeMouseState()">Find Path</button></li>
 						<li id="saveToggle2" style="display: none;"><button id="saveToggle" style="display: none;" class="button" onclick="togglePathSave()">Save Paths</button></li>
-						<li><button id="premadeCityButton" class="button" onclick="toggleDrawPremade()">Random City</button></li>
-						<li><button class="button" onclick="clearCities()">Clear Cities</button></li>
+						<li><button id="changeBots" class="button" onclick="toggleBots()">Hide Bots</button></li>
+						<li><h2 style="color:white;">Build Mode: </h2></li>
+						<li><button id="premadeCityButton" class="button" onclick="toggleDrawPremade()">Random Graph</button></li>
+						<li><button id="directionButton" class="button" onclick="toggleDirection()">Undirected</button></li>
+						<li><button id="autoConnectButton" class="button" onclick="toggleAutoConnect()">Auto Connect</button></li>
+						<li><h2 style="color:white;">Help: </h2></li>
+						<li><button class="button" onclick="clearCities()">Clear Graph</button></li>
 						<li><button id="resetButton" class="button" onclick="location.reload()">Reset</button></li>
 						<li><button id="helpButton" class="button" onclick="InfoBoardToggle()">Help</button></li>
-						<li><input id="citiesToBuild" type="text" value="20"><br>Premade cities input</li>
+						<li><input id="citiesToBuild" type="text" value="20"><br>Random Graph Input</li>
 						<!-- <li><p style="height: 200px;" id="path_text">Current Paths: </p></li> -->
 					</ul>
 				</div>

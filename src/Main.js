@@ -8,12 +8,21 @@ var savePathButton2 = document.getElementById("saveToggle2");
 var premadeCityButton = document.getElementById("premadeCityButton");
 var pathstext = document.getElementById("path_text");
 var infoboardobject = document.getElementById("info-board-id");
+var directionButton = document.getElementById("directionButton");
+var botsButton = document.getElementById("changeBots");
+var autoConnectButton = document.getElementById("autoConnectButton");
+autoConnectButton.setAttribute("style", "background-image: linear-gradient(to left, #ffffff, red);");
 
 var screen_width = canvas.width;
 var screen_height = canvas.height;
 var start_simulat = false;
 var drawPremade = false;
 var infoboardtoggle = false;
+var autoConnectToggle = false;
+var directed = true;
+var showBots = true;
+
+var historyTimeline = [];
 
 var mouseClickState = 0;
 
@@ -28,6 +37,8 @@ for (var i = 0; i < 5; i++) {
 function startSimulator(){
 	start_simulat = true;
 	document.getElementById("start-button").style.display = "none";
+	infoboardobject.style.display = "block";
+	infoboardtoggle = true;
 }
 
 
@@ -94,12 +105,112 @@ function toggleDrawPremade(){
 	}
 }
 
+function toggleDirection(){
+	if(!directed){
+		directed = true;
+		directionButton.removeAttribute("style");
+		directionButton.innerHTML = 'Undirected';
+	} else {
+		directed = false;
+		directionButton.setAttribute("style", "background-image: linear-gradient(to left, #ffffff, red);");
+		directionButton.innerHTML = 'Directed';
+	}
+}
+
+function toggleBots(){
+	if(showBots){
+		showBots = false;
+		botsButton.setAttribute("style", "background-image: linear-gradient(to left, #ffffff, red);");
+	} else {
+		showBots = true;
+		botsButton.removeAttribute("style");
+	}
+}
+
+function toggleAutoConnect(){
+	if(autoConnectToggle){
+		autoConnectToggle = false;
+		autoConnectButton.setAttribute("style", "background-image: linear-gradient(to left, #ffffff, red);");
+	} else {
+		autoConnectToggle = true;
+		autoConnectButton.removeAttribute("style");
+	}
+}
+
 function mouseClick(e){
 	x=e.clientX;
 	y=e.clientY;
 	if(mouseClickState == 0){
-		city1 = new City(40,x, y, cities.length+1);
-		cities.push(city1);
+		var noCity = false;
+		if(cities.length == 0){
+			city1 = new City(40,x, y, cities.length+1);
+			cities.push(city1);
+			historyTimeline.push(city1);
+			return;
+		}
+		for (var i = 0; i < cities.length; i++) {
+			var distance_vector = [cities[i].getPosition()[0]-x, cities[i].getPosition()[1]-y];
+			var distance = Math.floor(Math.sqrt(distance_vector[0]*distance_vector[0] + distance_vector[1]*distance_vector[1]));
+			if (distance < cities[i].getRadius()){
+				noCity = true;
+				if(clicked == 0){
+					//if clicked city is an already clicked city.
+					if((cities[i] == start_city || cities[i] == end_city)){
+						//if its not in already clicked city list.
+						if(!(save_path_city_list.includes(cities[i]))){
+							//if  save path is not toggeld
+							//set new start city to clicked city.
+							start_city = cities[i];
+							clicked++;
+						}
+						return;
+					}
+					//if start city is not the clicked city and start city has been clicked and clicked city is not the end city, and its not in saved path.
+					//this means its a new city that has not been clicked before.
+					if(start_city != cities[i] && start_city != null && cities[i] != end_city && !(save_path_city_list.includes(cities[i]))){
+						//if save path is activated, create new path and return
+						//deactive the last active ones.
+						start_city.drawOutline();
+						start_city = null;
+						end_city.drawOutline();
+						end_city = null;
+					}
+					//active first city, if none of the above was true;
+					if(!(save_path_city_list.includes(cities[i]))){
+						start_city = cities[i];
+						start_city.drawOutline();
+						clicked++;
+					}
+				} else {
+					//if its not a already clicked city
+					if(!(save_path_city_list.includes(cities[i]))){
+						//clear path if save path toggle is not active.
+						end_city = cities[i];
+						end_city.drawOutline();
+						clicked = 0;
+
+						historyTimeline.push(start_city.setRoad(start_city.getPosition(), end_city.getPosition()));
+						start_city.getKnownCities().push(end_city);
+						if(directed){
+							historyTimeline.push(end_city.setRoad(end_city.getPosition(), start_city.getPosition()));
+							end_city.getKnownCities().push(start_city);
+						}
+
+						start_city.drawOutline();
+						start_city = null;
+						end_city.drawOutline();
+						end = null;
+						return;
+					}
+				}
+			}
+		}
+		if(noCity == false){
+			city1 = new City(40,x, y, cities.length+1);
+			cities.push(city1);
+			historyTimeline.push(city1);
+			return;
+		}
 	} else if(mouseClickState == 1){
 		for (var i = 0; i < cities.length; i++) {
 			var distance_vector = [cities[i].getPosition()[0]-x, cities[i].getPosition()[1]-y];
@@ -204,7 +315,28 @@ function changeMouseState(){
 document.addEventListener('keydown', function(event) {
 	var x = event.keyCode;
 	if (x == 82) {  //r is clicked.
-		cities.pop();
+		var deleted = historyTimeline.pop();
+		if(deleted instanceof City){
+			cities.splice(cities.indexOf(deleted), 1);
+			for(var i = 0; i < cities.length; i++){
+				for(var j = 0; j < cities[i].getRoads().length; j++){
+					if(JSON.stringify(cities[i].getRoads()[j].getRoad()[1]) == JSON.stringify(deleted.getPosition())){
+						cities[i].getRoads().splice(j, 1);
+					}
+					if(cities[i].getKnownCities().includes(deleted)){
+						cities[i].getKnownCities().splice(cities[i].getKnownCities().indexOf(deleted), 1);
+					}
+				}
+			}
+		} else {
+			for(var i = 0; i < cities.length; i++){
+				for(var j = 0; j < cities[i].getRoads().length; j++){
+					if(JSON.stringify(cities[i].getRoads()[j].getRoad()[1]) == JSON.stringify(deleted.getRoad()[1]) && JSON.stringify(cities[i].getRoads()[j].getRoad()[0]) == JSON.stringify(deleted.getRoad()[0])){
+						cities[i].getRoads().splice(j, 1);
+					}	
+				}
+			}
+		}
 	}
 }, false);
 
@@ -245,6 +377,7 @@ function setup(){
 	for (var i = 0; i < 10; i++) {
 		city1 = new City(40,Math.floor(Math.random() * screen_width), Math.floor(Math.random() * screen_height));
 		cities.push(city1);
+		historyTimeline.push(city1);
 	}
 }
 
@@ -279,6 +412,7 @@ setInterval(async function update(){
 		if(drawPremade){
 			for (var i = 0; i < cords.length; i++) {
 				cities.push(new City(40, cords[i][0], cords[i][1], cities.length+1));
+				historyTimeline.push(cities[cities.length-1]);
 				cords.splice(i, 1);
 			}
 		}
@@ -305,7 +439,7 @@ setInterval(async function update(){
 		ctx.font = "35px Times New Roman";
 		ctx.fillStyle = "white";
 		ctx.textAlign = "center";
-		ctx.fillText("CITY BLUEPRINT AND PATHFINDING", screen_width/2, 50);
+		ctx.fillText("GRAPH VISUALIZER", screen_width/2, 50);
 
 		//draw mode
 		ctx.font = "20px Times New Roman";
@@ -319,13 +453,15 @@ setInterval(async function update(){
 		}
 
 
-		if (Math.floor(Math.random() * 100) < 2.5*cities.length){
-			if(cities.length > 0){
-			var randomCity = cities[Math.floor(Math.random() * cities.length)];
-			if(randomCity.getRoads().length > 0){
-				var randomRoad = randomCity.getRoads()[Math.floor(Math.random() * randomCity.getRoads().length)].getRoad();
-				var car1 = new BotCar(randomRoad[0], randomRoad[1], 5, "white");
-				cars.push(car1);
+		if(showBots){
+			if (Math.floor(Math.random() * 100) < 2.5*cities.length){
+				if(cities.length > 0){
+				var randomCity = cities[Math.floor(Math.random() * cities.length)];
+				if(randomCity.getRoads().length > 0){
+					var randomRoad = randomCity.getRoads()[Math.floor(Math.random() * randomCity.getRoads().length)].getRoad();
+					var car1 = new BotCar(randomRoad[0], randomRoad[1], 5, "white");
+					cars.push(car1);
+					}
 				}
 			}
 		}
@@ -337,9 +473,10 @@ setInterval(async function update(){
 			}
 		}
 
-
 		for (var i = 0; i < cities.length; i++) {
-			cities[i].check(cities);
+			if(autoConnectToggle){
+				cities[i].check(cities);
+			}
 			cities[i].draw(ctx);
 		}
 
@@ -370,15 +507,13 @@ setInterval(async function update(){
 		ctx.font = (screen_width/screen_height*30)+"px Times New Roman";
 		ctx.fillStyle = "white";
 		ctx.textAlign = "center";
-		ctx.fillText("CITY BLUEPRINT AND PATHFINDING", screen_width/2, screen_height*0.35);
+		ctx.fillText("GRAPH VISUALIZER AND PATHFINDING", screen_width/2, screen_height*0.35);
 
 		//draw titleinfo
 		ctx.font = (screen_width/screen_height*15)+"px Times New Roman";
 		ctx.fillStyle = "white";
 		ctx.textAlign = "center";
-		ctx.fillText("Click anywhere on the blueprint to create a city!", screen_width/2, screen_height*0.60);
-		ctx.font = (screen_width/screen_height*10)+"px Times New Roman";
-		ctx.fillText("Close cities will connect and create roads.", screen_width/2, screen_height*0.65);
+		ctx.fillText("Click anywhere on the blueprint to create a graph!", screen_width/2, screen_height*0.60);
 	}
 
 }, 30);

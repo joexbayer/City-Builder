@@ -53,11 +53,13 @@ class City {
 
 	setRoad(from, too){
 		var road1 = new Road(from, too);
+		this.animator.addAnimationStage(4, 10, this.radius, [from, too]);
 		this.roads.push(road1);
 		if(this.roads.length > 0){
 			this.radius = this.radius + 0.1*this.roads.length;
 		}
 		this.animator.addAnimationStage(3, 1, this.radius);
+		return road1;
 	}
 
 	draw(ctx){
@@ -87,7 +89,7 @@ class City {
 			ctx.font = "15px Times";
 			ctx.fillStyle = "black";
 			ctx.textAlign = "center";
-			ctx.fillText("City "+this.cityID, this.x_position, this.y_position+5);
+			ctx.fillText("Node "+this.cityID, this.x_position, this.y_position+5);
 		} 
 	}
 	check(cities){
@@ -113,7 +115,6 @@ class City {
 					this.knownCities.push(cities[i]);
 					this.detection_radius = this.detection_radius - this.detection_radius*(this.knownCities.length/20);
 					this.setRoad([this.x_position,this.y_position], [cities[i].getPosition()[0], cities[i].getPosition()[1]]);
-					this.animator.addAnimationStage(4, 10, this.radius, [[this.x_position,this.y_position], [cities[i].getPosition()[0], cities[i].getPosition()[1]]]);
 				}
 			}
 		}
