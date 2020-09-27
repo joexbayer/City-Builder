@@ -1,7 +1,7 @@
 # Graph-Visualizer
 Graph Visualizer with pathfinding.
 
-Working Demo: <a href="https://joexbayer.github.io/City-Builder/">Click here!</a>
+Working Demo: <a href="https://joexbayer.github.io/Graph-Visualizer/">Click here!</a>
 
 A Javascript based graph visualizer and pathfinding.
 
