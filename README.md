@@ -17,6 +17,10 @@ Nodes will be marked with "Node X" based on when they where created.
 
  ![alt text](https://github.com/joexbayer/Graph-Visualizer/blob/master/src/Graph.png?raw=true)
  
+Color Mode update: Give nodes custom colors!
+
+ ![alt text](https://github.com/joexbayer/Graph-Visualizer/blob/master/src/ColorMode.png?raw=true)
+ 
 Pathfinding: <br>
 When "Find Path" option is activated, the user can click two nodes and the shortest path will be found
 using the <a href="https://en.wikipedia.org/wiki/A*_search_algorithm">A* algorithm</a>
