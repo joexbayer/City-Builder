@@ -225,6 +225,7 @@ function mouseClick(e){
 			}
 			end_city = null;
 			start_city = null;
+			clicked = 0;
 			return;
 		}
 	} else if(mouseClickState == 1){
