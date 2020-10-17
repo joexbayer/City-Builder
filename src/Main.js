@@ -217,6 +217,14 @@ function mouseClick(e){
 			city1 = new City(40,x, y, cities.length+1);
 			cities.push(city1);
 			historyTimeline.push(city1);
+			if(start_city != null){
+				start_city.drawOutline();
+				start_city = null;
+			}
+			if(end_city != null){
+				end_city.drawOutline();
+				end_city = null;
+			}
 			return;
 		}
 	} else if(mouseClickState == 1){
