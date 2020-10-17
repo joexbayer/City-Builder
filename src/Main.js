@@ -207,7 +207,7 @@ function mouseClick(e){
 						start_city.drawOutline();
 						start_city = null;
 						end_city.drawOutline();
-						end = null;
+						end_city = null;
 						return;
 					}
 				}
