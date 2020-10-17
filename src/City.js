@@ -51,8 +51,9 @@ class City {
 		return this.radius;
 	}
 
-	setRoad(from, too){
-		var road1 = new Road(from, too);
+	setRoad(from, too, color){
+		var road1 = new Road(from, too, color);
+		this.animator.setColor(this.color);
 		this.animator.addAnimationStage(4, 10, this.radius, [from, too]);
 		this.roads.push(road1);
 		if(this.roads.length > 0){
@@ -60,6 +61,12 @@ class City {
 		}
 		this.animator.addAnimationStage(3, 1, this.radius);
 		return road1;
+	}
+
+	drawRoads(ctx){
+		for (var i = 0; i < this.roads.length; i++) {
+			this.roads[i].draw(ctx);
+		}
 	}
 
 	draw(ctx){
@@ -73,10 +80,6 @@ class City {
 				ctx.arc(this.x_position, this.y_position, this.radius+5, 0, 2 * Math.PI);
 				ctx.fill();
 				ctx.closePath();
-			}
-
-			for (var i = 0; i < this.roads.length; i++) {
-				this.roads[i].draw(ctx);
 			}
 			//draw city
 			ctx.beginPath();

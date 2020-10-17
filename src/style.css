@@ -41,6 +41,11 @@ body::-webkit-scrollbar {
   background-image: none;
 }
 
+h2 {
+  padding: 0;
+  margin: 0;
+}
+
 .options {
 	overflow-x: hidden;
   -ms-overflow-style: none;

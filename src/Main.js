@@ -11,6 +11,7 @@ var infoboardobject = document.getElementById("info-board-id");
 var directionButton = document.getElementById("directionButton");
 var botsButton = document.getElementById("changeBots");
 var autoConnectButton = document.getElementById("autoConnectButton");
+var nodecolorbutton = document.getElementById("colorNode");
 autoConnectButton.setAttribute("style", "background-image: linear-gradient(to left, #ffffff, red);");
 
 var screen_width = canvas.width;
@@ -21,6 +22,7 @@ var infoboardtoggle = false;
 var autoConnectToggle = false;
 var directed = true;
 var showBots = true;
+var colornodetoggle = false;
 
 var historyTimeline = [];
 
@@ -57,6 +59,16 @@ function clearCities(){
 	cities = [];
 	pathfinding_paths = [];
 	save_path_city_list = [];
+}
+
+function toggleNodeColor(){
+	if(colornodetoggle){
+		colornodetoggle = false;
+		nodecolorbutton.removeAttribute("style");
+	} else {
+		colornodetoggle = true;
+		nodecolorbutton.setAttribute("style", "background-image: linear-gradient(to left, #ffffff, red);");
+	}
 }
 
 function togglePathSave(){
@@ -160,6 +172,10 @@ function mouseClick(e){
 			var distance_vector = [cities[i].getPosition()[0]-x, cities[i].getPosition()[1]-y];
 			var distance = Math.floor(Math.sqrt(distance_vector[0]*distance_vector[0] + distance_vector[1]*distance_vector[1]));
 			if (distance < cities[i].getRadius()){
+				if(colornodetoggle){
+					cities[i].color = document.getElementById("nodecolorid").value;
+					return;
+				}
 				noCity = true;
 				if(clicked == 0){
 					//if clicked city is an already clicked city.
@@ -197,10 +213,10 @@ function mouseClick(e){
 						end_city.drawOutline();
 						clicked = 0;
 
-						historyTimeline.push(start_city.setRoad(start_city.getPosition(), end_city.getPosition()));
+						historyTimeline.push(start_city.setRoad(start_city.getPosition(), end_city.getPosition(), start_city.color));
 						start_city.getKnownCities().push(end_city);
 						if(directed){
-							historyTimeline.push(end_city.setRoad(end_city.getPosition(), start_city.getPosition()));
+							historyTimeline.push(end_city.setRoad(end_city.getPosition(), start_city.getPosition(), end_city.color));
 							end_city.getKnownCities().push(start_city);
 						}
 
@@ -469,6 +485,12 @@ setInterval(async function update(){
 			ctx.fillText("BUILD MODE", screen_width/2, screen_height*(1/8));
 		}
 
+		for (var i = 0; i < cities.length; i++) {
+			if(autoConnectToggle){
+				cities[i].check(cities);
+			}
+			cities[i].drawRoads(ctx);
+		}
 
 		if(showBots){
 			if (Math.floor(Math.random() * 100) < 2.5*cities.length){
@@ -476,7 +498,7 @@ setInterval(async function update(){
 				var randomCity = cities[Math.floor(Math.random() * cities.length)];
 				if(randomCity.getRoads().length > 0){
 					var randomRoad = randomCity.getRoads()[Math.floor(Math.random() * randomCity.getRoads().length)].getRoad();
-					var car1 = new BotCar(randomRoad[0], randomRoad[1], 5, "white");
+					var car1 = new BotCar(randomRoad[0], randomRoad[1], 5, randomCity.color);
 					cars.push(car1);
 					}
 				}
@@ -491,9 +513,6 @@ setInterval(async function update(){
 		}
 
 		for (var i = 0; i < cities.length; i++) {
-			if(autoConnectToggle){
-				cities[i].check(cities);
-			}
 			cities[i].draw(ctx);
 		}
 
