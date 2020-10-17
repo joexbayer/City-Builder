@@ -148,12 +148,12 @@ function mouseClick(e){
 			historyTimeline.push(city1);
 			if(start_city != null){
 				start_city.drawOutline();
-				start_city = null;
 			}
 			if(end_city != null){
 				end_city.drawOutline();
-				end_city = null;
 			}
+			end_city = null;
+			start_city = null;
 			return;
 		}
 		for (var i = 0; i < cities.length; i++) {
@@ -219,12 +219,12 @@ function mouseClick(e){
 			historyTimeline.push(city1);
 			if(start_city != null){
 				start_city.drawOutline();
-				start_city = null;
 			}
 			if(end_city != null){
 				end_city.drawOutline();
-				end_city = null;
 			}
+			end_city = null;
+			start_city = null;
 			return;
 		}
 	} else if(mouseClickState == 1){
